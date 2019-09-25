@@ -34,7 +34,7 @@
 #define LPC18XX_RGU_H_
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc_types.h"
 
 

@@ -29,7 +29,7 @@
  */
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_lcd.h"
 
 /* If this source file built with example, the LPC18xx FW library configuration

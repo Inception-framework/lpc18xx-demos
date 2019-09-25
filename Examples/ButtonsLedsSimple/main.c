@@ -9,7 +9,7 @@
 *******************************************************************************/
 
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc1850_db1.h"
 #include "lpc18xx_gpio.h"
 #include "lpc18xx_scu.h"
@@ -18,7 +18,7 @@
 
 int main(void)
 {
-    //SystemInit();
+    SystemInit();
     CGU_Init();
 
     // Configure GPIO pins connected to LEDs as outputs
@@ -41,8 +41,7 @@ int main(void)
     GPIO_SetDir(S3_GPIO_PORT, S3_GPIO_MASK, 0);
     GPIO_SetDir(S4_GPIO_PORT, S4_GPIO_MASK, 0);
 
-    int i=0;
-    while(i++<10000)
+    while(1)
     {
         if (GPIO_ReadValue(S1_GPIO_PORT) & S1_GPIO_MASK)
             GPIO_ClearValue(D3_GPIO_PORT, D3_GPIO_MASK);

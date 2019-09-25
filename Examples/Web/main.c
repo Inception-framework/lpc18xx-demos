@@ -9,7 +9,7 @@
 *******************************************************************************/
 #include <string.h>
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc1850_db1.h"
 #include "lpc18xx_cgu.h"
 #include "lpc18xx_emc.h"
@@ -20,8 +20,6 @@
 #include "easyweb/tcpip.h"
 
 #include "webpage.h"
-
-#include "klee/klee.h"
 
 volatile uint32_t TimeTick  = 0;
 // SysTick interrupt happens every 10 ms
@@ -99,7 +97,7 @@ void HTTPServer(void)
 
 int main(void)
 {
-    //SystemInit();
+    SystemInit();
 
     // External flash note:
     // This demo can be larger than 16k (bootloader initializes only A[13..0])
@@ -109,7 +107,7 @@ int main(void)
 
     CGU_Init();
     // Enable 32 kHz & 1 kHz on osc32k
-    CGU_EnableEntity(CGU_CLKSRC_32KHZ_OSC, ENABLE);
+    CGU_EnableEntity(CGU_CLKSRC_32KHZ_OSC, ENABLE);			
 
     CGU_EnableEntity(CGU_CLKSRC_ENET_RX_CLK, ENABLE);
     CGU_EnableEntity(CGU_CLKSRC_ENET_TX_CLK, ENABLE);
@@ -120,10 +118,6 @@ int main(void)
     /* Generate interrupt every 10 ms */
     SysTick_Config(CGU_GetPCLKFrequency(CGU_PERIPHERAL_M3CORE)/100);
 
-    /*klee_make_symbolic(TCPStateMachine, sizeof TCPStateMachine, "TCPStateMachine");
-    klee_make_symbolic(_TxFrame1, sizeof _TxFrame1, "_TxFrame1");
-    klee_make_symbolic(_TxFrame2, sizeof _TxFrame2, "_TxFrame2");*/
-    //klee_make_symbolic(_RxTCPBuffer, sizeof _RxTCPBuffer, "_RxTCPBuffer");
 
     TCPLowLevelInit();
 
@@ -133,8 +127,7 @@ int main(void)
     TCPLocalPort = TCP_PORT_HTTP;
 
     // repeat forever
-    int i=0;
-    while (i++<10000)
+    while (1)
     {
         // listen for incoming TCP-connection
         if (!(SocketStatus & SOCK_ACTIVE)) TCPPassiveOpen();

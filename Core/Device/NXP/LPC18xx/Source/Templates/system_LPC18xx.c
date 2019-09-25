@@ -23,7 +23,7 @@
 * use without further testing or modification.
 **********************************************************************/
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 
 /*----------------------------------------------------------------------------
   Define clocks
@@ -49,9 +49,10 @@ extern uint32_t getPC(void);
 void SystemInit (void)
 {
     SystemCoreClock = __IRC;
-	// Enable VTOR register to point to vector table
-	//SCB->VTOR = getPC() & 0xFFF00000;
-	SCB->VTOR = 0x10000000 & 0xFFF00000;
+    // Enable VTOR register to point to vector table
+
+    //SCB->VTOR = getPC() & 0xFFF00000;
+    SCB->VTOR = 0x10000000 & 0xFFF00000;
 
     /*Enable Buffer for External Flash*/
     LPC_EMC->STATICCONFIG0 |= 1<<19;

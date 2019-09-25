@@ -8,7 +8,7 @@
 *
 *******************************************************************************/
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_scu.h"
 #include "lpc18xx_cgu.h"
 #include "lpc18xx_lcd.h"
@@ -60,7 +60,7 @@ static const LCD_CFG_Type lcdCfg = {
 };
 
 
-//extern void DelayMs(uint32_t delay);
+extern void DelayMs(uint32_t delay);
 static void TFP410_WriteReg(uint8_t reg, uint8_t value);
 
 

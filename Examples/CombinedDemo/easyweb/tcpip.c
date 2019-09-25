@@ -13,7 +13,7 @@
  ******************************************************************/
 
 #include "tcpip.h"
-#include "emac.h"         // Keil: Line added
+#include "EMAC.h"         // Keil: Line added
 #include <string.h>       // Keil: Line added
 
 const unsigned char MyMAC[6] =   // "M1-M2-M3-M4-M5-M6"

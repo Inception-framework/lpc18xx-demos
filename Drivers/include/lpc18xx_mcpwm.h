@@ -34,7 +34,7 @@
 #define LPC18XX_MCPWM_H_
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc_types.h"
 
 

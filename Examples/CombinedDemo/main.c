@@ -11,7 +11,7 @@
 
 #include <string.h>
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc1850_db1.h"
 #include "lpc18xx_gpio.h"
 #include "lpc18xx_scu.h"
@@ -42,7 +42,7 @@ ErrorCode_t USB_Configure_Event(USBD_HANDLE_T hUsb);
 #include "webpage.h"
 
 static volatile uint32_t TimeTick;
-void HTTPServer(void);
+static void HTTPServer(void);
 
 static volatile uint8_t blinkOn;
 
@@ -85,17 +85,17 @@ int main(void)
     blinkOn = 0;
 
     // Configure clocks
-	//SystemInit();
+	SystemInit();
 
     // External flash note:
     // This demo can be larger than 16k (bootloader initializes only A[13..0])
     // So initialize memory before clock setup
-    //MemoryPinInit();
-    //EMCFlashInit();
+    MemoryPinInit();
+    EMCFlashInit();
 
-    //CGU_Init();
+    CGU_Init();
 
-    //CGU_SetPLL0();
+    CGU_SetPLL0();
     CGU_EnableEntity(CGU_CLKSRC_PLL0, ENABLE);
     CGU_EntityConnect(CGU_CLKSRC_PLL0, CGU_BASE_USB0);
 
@@ -222,7 +222,7 @@ int main(void)
 // not work. In this case, simply add some extra lines
 // (e.g. CR and LFs) to the HTML-code.
 
-void HTTPServer(void)
+static void HTTPServer(void)
 {
     if (SocketStatus & SOCK_CONNECTED)             // check if somebody has connected to our TCP
     {

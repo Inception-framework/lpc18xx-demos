@@ -517,10 +517,7 @@ uint32_t CGU_EnableEntity(CGU_ENTITY_T ClockEntity, uint32_t en){
 			LPC_CREG->CREG0 &= ~((1<<1)|(1<<0));
 			LPC_CREG->CREG0 |= (1<<3);
 		}
-
-		//HACK : Reduce loop duration since symbolic Execution takes more time...
-		for(i = 0;i<5;i++);
-		// for(i = 0;i<1000000;i++);
+		for(i = 0;i<1000000;i++);
 
 	}else if(ClockEntity == CGU_CLKSRC_ENET_RX_CLK){
 		scu_pinmux(0xC ,0 , MD_PLN, FUNC3);
@@ -538,8 +535,7 @@ uint32_t CGU_EnableEntity(CGU_ENTITY_T ClockEntity, uint32_t en){
 		else
 			LPC_CGU->XTAL_OSC_CTRL &= ~CGU_CTRL_EN_MASK;
 		/*Delay for stable clock*/
-		// for(i = 0;i<1000000;i++);
-		for(i = 0;i<5;i++);
+		for(i = 0;i<1000000;i++);
 
 	}else{
 		RegOffset = CGU_Entity_ControlReg_Offset[ClockEntity];
@@ -674,17 +670,9 @@ uint32_t	CGU_SetPLL1(uint32_t mult){
 	uint32_t msel=0, nsel=0, psel=0, pval=1;
 	uint32_t freq;
 	uint32_t ClkSrc = (LPC_CGU->PLL1_CTRL & CGU_CTRL_SRC_MASK)>>24;
-	printf("ClkSrc : %d\n", ClkSrc);
 	freq = CGU_ClockSourceFrequency[ClkSrc];
 	freq *= mult;
 	msel = mult-1;
-
-	printf("Frequency : %d\n", 2*(pval)*freq);
-	printf("LPC_CGU->PLL1_CTRL = %d \n", LPC_CGU->PLL1_CTRL);
-	printf("MASK : %08x",  ~(CGU_PLL1_FBSEL_MASK |
-									CGU_PLL1_BYPASS_MASK |
-									CGU_PLL1_DIRECT_MASK |
-									(0x03<<8) | (0xFF<<16) | (0x03<<12)));
 
 	LPC_CGU->PLL1_CTRL &= ~(CGU_PLL1_FBSEL_MASK |
 									CGU_PLL1_BYPASS_MASK |
@@ -693,19 +681,16 @@ uint32_t	CGU_SetPLL1(uint32_t mult){
 
 	if(freq<156000000){
 		//psel is encoded such that 0=1, 1=2, 2=4, 3=8
-		//HACK : Symbolic Execution is not fast enough to fill this condition
-
 		while(2*(pval)*freq < 156000000) {
 			psel++;
 			pval*=2;
 		}
-
-		if(2*(pval)*freq > 320000000) {
-			//THIS IS OUT OF RANGE!!!
-			//HOW DO WE ASSERT IN SAMPLE CODE?
-			// __breakpoint(0);
-			return CGU_ERROR_INVALID_PARAM;
-		}
+//		if(2*(pval)*freq > 320000000) {
+//			//THIS IS OUT OF RANGE!!!
+//			//HOW DO WE ASSERT IN SAMPLE CODE?
+//			//__breakpoint(0);
+//			return CGU_ERROR_INVALID_PARAM;
+//		}
 		LPC_CGU->PLL1_CTRL |= (msel<<16) | (nsel<<12) | (psel<<8) | CGU_PLL1_FBSEL_MASK;
 	}else if(freq<320000000){
 		LPC_CGU->PLL1_CTRL |= (msel<<16) | (nsel<<12) | (psel<<8) |CGU_PLL1_DIRECT_MASK | CGU_PLL1_FBSEL_MASK;

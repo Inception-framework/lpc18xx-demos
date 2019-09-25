@@ -30,7 +30,7 @@
  */
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_can.h"
 #include "lpc18xx_cgu.h"
 

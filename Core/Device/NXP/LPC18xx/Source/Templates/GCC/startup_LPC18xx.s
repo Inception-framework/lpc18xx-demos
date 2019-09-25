@@ -57,7 +57,7 @@ __cs3_heap_end:
 
 __cs3_interrupt_vector_cortex_m:
     .long   __cs3_stack                 /* Top of Stack                 */
-    .long   __cs3_reset                 /* Reset Handler                */
+    .long   __cs3_reset_cortex_m        /* Reset Handler                */
     .long   NMI_Handler                 /* NMI Handler                  */
     .long   HardFault_Handler           /* Hard Fault Handler           */
     .long   MemManage_Handler           /* MPU Fault Handler            */
@@ -142,26 +142,8 @@ __cs3_interrupt_vector_cortex_m:
     .type   __cs3_reset_cortex_m, %function
 __cs3_reset_cortex_m:
     .fnstart
-.if (RAM_MODE)
-/* Clear .bss section (Zero init) */
-	MOV     R0, #0
-	LDR     R1, =__bss_start__
-	LDR     R2, =__bss_end__
-	CMP     R1,R2
-	BEQ     BSSIsEmpty
-LoopZI:
-	CMP     R1, R2
-	BHS		BSSIsEmpty
-	STR   	R0, [R1]
-	ADD		R1, #4
-	BLO     LoopZI
-BSSIsEmpty:
-    LDR     R0,=main
+    LDR     R0,=_start
     BX      R0
-.else
-	LDR     R0,=_start
-    BX      R0
-.endif
     .pool
     .cantunwind
     .fnend
@@ -294,3 +276,18 @@ getPC:
 	BX		LR
 	.size   getPC,.-getPC
     .end
+
+.globl get_pc
+get_pc:
+    mov r0,pc
+    bx lr
+
+.globl get_sp
+get_sp:
+    mov r0,sp
+    bx lr
+
+.globl get_cpsr
+get_cpsr:
+    mrs r0,cpsr
+    bx lr

@@ -8,7 +8,7 @@
 *
 *******************************************************************************/
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_cgu.h"
 #include "lpc18xx_emc.h"
 #include <string.h>

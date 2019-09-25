@@ -8,7 +8,7 @@
 *
 *******************************************************************************/
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc1850_db1.h"
 #include "lpc18xx_gpio.h"
 #include "lpc18xx_scu.h"
@@ -17,9 +17,7 @@
 
 int main(void)
 {
-    // The stub initializes the device,
-    // no need to do it here
-    //SystemInit();
+    SystemInit();
     CGU_Init();
 
     // Configure LEDs
@@ -56,7 +54,7 @@ int main(void)
     NVIC_EnableIRQ(PIN_INT0_IRQn);
 
 
-    //Configure button S2 to generate GPIO group interrupt 0
+    // Configure button S2 to generate GPIO group interrupt 0
     LPC_GPIO_GROUP_INT0->CTRL = 0x01;   // clear interrupt, OR, edge
     ((uint32_t *)&(LPC_GPIO_GROUP_INT0->PORT_POL0))[S2_GPIO_PORT] &= ~S2_GPIO_MASK; // falling edge
     ((uint32_t *)&(LPC_GPIO_GROUP_INT0->PORT_ENA0))[S2_GPIO_PORT] |= S2_GPIO_MASK;  // enable interrupt
@@ -71,8 +69,8 @@ int main(void)
     ((uint32_t *)&(LPC_GPIO_GROUP_INT1->PORT_ENA0))[S4_GPIO_PORT] |= S4_GPIO_MASK;  // enable interrupt
     NVIC_EnableIRQ(GINT1_IRQn);
 
-    int i=0;
-    while (i++<1000000)
+
+    while (1)
     {
     }
 }

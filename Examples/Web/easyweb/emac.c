@@ -17,7 +17,7 @@
 
 #include "emac.h"
 #include "tcpip.h"
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_scu.h"
 #include "lpc18xx_rgu.h"
 

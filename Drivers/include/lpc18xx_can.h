@@ -34,7 +34,7 @@
 #define __LPC18XX_CAN_H
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc_types.h"
 
 

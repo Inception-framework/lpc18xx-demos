@@ -24,7 +24,7 @@
 * use without further testing or modification.
 **********************************************************************/
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc18xx_emc.h"
 #include "lpc18xx_scu.h"
 

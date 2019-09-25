@@ -9,7 +9,7 @@
 *******************************************************************************/
 
 
-#include "lpc18xx.h"
+#include "LPC18xx.h"
 #include "lpc1850_db1.h"
 #include "lpc18xx_scu.h"
 #include "lpc18xx_cgu.h"

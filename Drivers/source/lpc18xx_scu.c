@@ -29,7 +29,7 @@
  */
 
 /* Includes ------------------------------------------------------------------- */
-#include "lpc18xx.h"                    /* LPC18xx definitions                */
+#include "LPC18xx.h"                    /* LPC18xx definitions                */
 #include "lpc_types.h"
 #include "lpc18xx_scu.h"
 
