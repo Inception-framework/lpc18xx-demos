@@ -4,18 +4,18 @@ OUTPUT=bin
 
 # Toolchain Path
 
-TOOL_PATH=
+LLVM_TOOL_PATH=/home/nasm/Tools/build_debug/Debug+Asserts/bin/
 # Toolchain
 
-IR           = $(TOOL_PATH)clang
+IR           = $(LLVM_TOOL_PATH)clang
 IC           = inception-cl
-#CC          = $(TOOL_PATH)clang
-#CXX         = $(TOOL_PATH)clang++
+#CC          = $(LLVM_TOOL_PATH)clang
+#CXX         = $(LLVM_TOOL_PATH)clang++
 CC           = arm-none-eabi-gcc
 CXX          = arm-none-eabi-g++
-LLVM_LINK    = $(TOOL_PATH)llvm-link
-LLVM_AS      = $(TOOL_PATH)llvm-as
-#AS           = $(TOOL_PATH)clang
+LLVM_LINK    = $(LLVM_TOOL_PATH)llvm-link
+LLVM_AS      = $(LLVM_TOOL_PATH)llvm-as
+#AS           = $(LLVM_TOOL_PATH)clang
 AS           = arm-none-eabi-as
 LD           = arm-none-eabi-gcc
 OBJDUMP      = arm-none-eabi-objdump
@@ -170,6 +170,5 @@ ADAPT_BC_ASM:
 	$Q$(IC) $(IC_FLAGS) $(OUTPUT).elf $(OUTPUT).bc $P
 	@echo "[LLVM-AS]       $(OUTPUT).ll"
 	$Q$(LLVM_AS) $(OUTPUT).elf.ll -o $(OUTPUT).bc $P
-	#$Q$(LLVM_AS) $(OUTPUT).elf.ll -o $(OUTPUT)_raw.bc $P
 	#opt -O3 -adce $(OUTPUT)_raw.bc -o $(OUTPUT).bc
 

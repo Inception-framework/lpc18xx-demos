@@ -51,11 +51,11 @@ __cs3_heap_end:
 
 /* Vector Table */
 
-    .section ".cs3.interrupt_vector"
-    .globl  __cs3_interrupt_vector_cortex_m
-    .type   __cs3_interrupt_vector_cortex_m, %object
+    .section ".interrupt_vector"
+    .globl  interrupt_vector
+    .type   interrupt_vector, %object
 
-__cs3_interrupt_vector_cortex_m:
+interrupt_vector:
     .long   __cs3_stack                 /* Top of Stack                 */
     .long   __cs3_reset_cortex_m        /* Reset Handler                */
     .long   NMI_Handler                 /* NMI Handler                  */
@@ -128,7 +128,7 @@ __cs3_interrupt_vector_cortex_m:
 	.long	CAN0_IRQHandler				/* 67 C_CAN0*/
 	.long 	QEI_IRQHandler				/* 68 QEI*/
 
-    .size   __cs3_interrupt_vector_cortex_m, . - __cs3_interrupt_vector_cortex_m
+    .size   interrupt_vector, . - interrupt_vector
 
 
     .thumb
