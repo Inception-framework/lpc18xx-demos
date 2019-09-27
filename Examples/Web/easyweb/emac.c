@@ -308,7 +308,7 @@ void EndReadFrame(void) {
 
 unsigned int CheckFrameReceived(void) {             // Packet received ?
 
-  if ((RX_DESC_STAT(RxDescIndex) & OWN_BIT) == 0) 		
+  if ((RX_DESC_STAT(RxDescIndex) & OWN_BIT) == 0)
     return(1);
   else
     return(0);

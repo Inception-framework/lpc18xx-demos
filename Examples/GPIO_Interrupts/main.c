@@ -17,8 +17,8 @@
 
 int main(void)
 {
-    SystemInit();
-    CGU_Init();
+    //SystemInit();
+    //CGU_Init();
 
     // Configure LEDs
     scu_pinmux(D3_SCU_CONFIG);

@@ -517,7 +517,7 @@ uint32_t CGU_EnableEntity(CGU_ENTITY_T ClockEntity, uint32_t en){
 			LPC_CREG->CREG0 &= ~((1<<1)|(1<<0));
 			LPC_CREG->CREG0 |= (1<<3);
 		}
-		for(i = 0;i<1000000;i++);
+		for(i = 0;i<10;i++);
 
 	}else if(ClockEntity == CGU_CLKSRC_ENET_RX_CLK){
 		scu_pinmux(0xC ,0 , MD_PLN, FUNC3);
@@ -535,7 +535,8 @@ uint32_t CGU_EnableEntity(CGU_ENTITY_T ClockEntity, uint32_t en){
 		else
 			LPC_CGU->XTAL_OSC_CTRL &= ~CGU_CTRL_EN_MASK;
 		/*Delay for stable clock*/
-		for(i = 0;i<1000000;i++);
+		//for(i = 0;i<1000000;i++);
+                for(i = 0;i<10;i++);
 
 	}else{
 		RegOffset = CGU_Entity_ControlReg_Offset[ClockEntity];

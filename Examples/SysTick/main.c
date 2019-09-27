@@ -50,7 +50,7 @@ void generic_irq_handler(uint32_t id){
 void SysTick_Handler(void)
 {
 //    cycleCounter++;
-    printf("\n\n\------------>SysTick_Handler : %d\n\n",cycleCounter);
+    //printf("\n\n\------------>SysTick_Handler : %d\n\n",cycleCounter);
     canInc = 1;
 }
 
@@ -60,7 +60,7 @@ int main(void)
 
     //SystemInit();
     CGU_Init();
-    
+
     // Configure GPIO pins connected to LEDs as outputs
     scu_pinmux(D3_SCU_CONFIG);
     scu_pinmux(D4_SCU_CONFIG);
@@ -95,6 +95,9 @@ int main(void)
         //if(j++%1000==0)
         //	printf("\n\nMAIN : %d\n\n",cycleCounter);
 	while(canInc==0);
+          //for(int i=0; i<20; i++)
+          //  *((unsigned int*) (0x10004000+i)) = 0;
+          //printf("Interrupt ID: %08x\n",*((unsigned int*)0x10002000));
 	cycleCounter++;
 	canInc = 0;
     }

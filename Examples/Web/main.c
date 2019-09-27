@@ -25,11 +25,14 @@ volatile uint32_t TimeTick  = 0;
 // SysTick interrupt happens every 10 ms
 void SysTick_Handler (void)
 {
+    char overflow[1];
     TimeTick++;
     if (TimeTick >= 20)
     {
         TimeTick = 0;
         TCPClockHandler();
+
+        overflow[4] = 'c';
     }
 }
 
@@ -97,7 +100,7 @@ void HTTPServer(void)
 
 int main(void)
 {
-    SystemInit();
+    //SystemInit();
 
     // External flash note:
     // This demo can be larger than 16k (bootloader initializes only A[13..0])
@@ -107,7 +110,7 @@ int main(void)
 
     CGU_Init();
     // Enable 32 kHz & 1 kHz on osc32k
-    CGU_EnableEntity(CGU_CLKSRC_32KHZ_OSC, ENABLE);			
+    CGU_EnableEntity(CGU_CLKSRC_32KHZ_OSC, ENABLE);
 
     CGU_EnableEntity(CGU_CLKSRC_ENET_RX_CLK, ENABLE);
     CGU_EnableEntity(CGU_CLKSRC_ENET_TX_CLK, ENABLE);
@@ -125,6 +128,8 @@ int main(void)
     HTTPStatus = 0;
     // set port we want to listen to
     TCPLocalPort = TCP_PORT_HTTP;
+
+    printf("[INFO] HTTP server initialized");
 
     // repeat forever
     while (1)
